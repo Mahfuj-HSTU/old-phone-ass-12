@@ -3,7 +3,7 @@ import { FaFacebook, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <div className='bg-slate-900 text-white text-center py-10'>
+        <div className='bg-slate-700 text-white text-center py-10'>
             <h3 className='text-3xl mb-2'>&copy;Mahfujur Rahman</h3>
             <p className=''>Frontend Developer</p>
             <div className='flex justify-center text-2xl '>
