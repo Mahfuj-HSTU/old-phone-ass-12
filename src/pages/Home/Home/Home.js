@@ -7,10 +7,8 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div className='max-w-screen-xl mx-auto'>
-                <Category></Category>
-                <Features></Features>
-            </div>
+            <Category></Category>
+            <Features></Features>
         </div>
     );
 };
