@@ -1,12 +1,39 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import logo from '../../../images/logo.png'
 
 const Header = () => {
+    const { user, logOut } = useContext( AuthContext )
+
+
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch()
+
+    }
 
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link> </li>
         <li className='font-semibold'><Link to='/blog'>Blog</Link> </li>
-        <li className='font-semibold'><Link to='/login'>Login</Link> </li>
+        {
+            user?.email ?
+                <>
+                    <li className='font-semibold dropdown'><Link tabIndex={ 0 }>Dashboard</Link>
+                        <ul tabIndex={ 0 } className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <li className='font-semibold'><Link to='/sellers'>All Seller</Link> </li>
+                            <li className='font-semibold'><Link to='/buyers'>All Buyer</Link> </li>
+                            <li className='font-semibold'><Link to='/myOrders'>My Orders</Link> </li>
+                            <li className='font-semibold'><Link to='/addProduct'>Add a Product</Link> </li>
+                        </ul>
+                    </li>
+                    <li className='font-semibold'>
+                        <button onClick={ handleLogOut } className='btn-ghost'>Log Out</button>
+                    </li>
+                </> :
+                <li className='font-semibold'><Link to='/login'>Login</Link> </li>
+        }
     </>
 
     return (
