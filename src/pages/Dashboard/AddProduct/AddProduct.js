@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const [ product, setProduct ] = useState( {} )
-    const [ id, setId ] = useState( null )
+    const navigate = useNavigate();
 
     const { data: categories = [] } = useQuery( {
         queryKey: [ 'categories' ],
@@ -14,8 +15,8 @@ const AddProduct = () => {
 
     const handleAddProduct = event => {
         event.preventDefault();
-        // console.log( product )
-        const url = ( `http://localhost:5000/categories/${ id }` )
+        // console.log( product );
+        const url = ( 'http://localhost:5000/products' )
         fetch( url, {
             method: "POST",
             headers: {
@@ -28,8 +29,9 @@ const AddProduct = () => {
                 if ( data.acknowledged ) {
                     toast.success( 'Product added successfully' )
                     event.target.reset();
+                    navigate( '/' )
                 }
-                // console.log( data )
+                console.log( data )
             } )
     }
 
@@ -49,13 +51,17 @@ const AddProduct = () => {
                 <form onSubmit={ handleAddProduct } className="card-body">
 
                     <div className="form-control">
+                        <input onChange={ handleInputBlur } type="text" name='sellers' placeholder="Your name" className="input input-bordered" required />
+                    </div>
+
+                    <div className="form-control">
                         <input onChange={ handleInputBlur } type="text" name='name' placeholder="Product name" className="input input-bordered" required />
                     </div>
 
-                    <select className="select select-bordered w-full max-w-xs" required>
+                    <select onChange={ handleInputBlur } className="select select-bordered w-full max-w-xs" name='brand' required>
                         <option value={ 0 } disabled selected>Select Product Category</option>
                         {
-                            categories.map( ( category, i ) => <option key={ category._id } setId={ category._id } value={ i + 1 }>{ category.name }</option> )
+                            categories.map( ( category, i ) => <option key={ category._id } value={ category.brand }>{ category.brand }</option> )
                         }
                     </select>
 
