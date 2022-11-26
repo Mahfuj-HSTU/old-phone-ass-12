@@ -1,17 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const { providerLogin, login } = useContext( AuthContext )
+    const [ loginEmail, setLoginEmail ] = useState( '' )
+    const [ token ] = useToken( loginEmail );
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
 
     const from = location.state?.from?.pathname || '/';
+
+    if ( token ) {
+        navigate( from, { replace: true } )
+    }
 
 
     // handle created user login
@@ -22,13 +29,12 @@ const Login = () => {
         const password = form.password.value;
 
         // console.log( user )
-
         login( email, password )
             .then( result => {
                 const user = result.user
                 console.log( user );
+                setLoginEmail( user?.email )
                 form.reset();
-                navigate( from, { replace: true } )
             } )
             .catch( error => {
                 console.error( 'error ', error )

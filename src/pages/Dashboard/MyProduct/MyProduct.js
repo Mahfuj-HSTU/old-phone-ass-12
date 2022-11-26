@@ -10,9 +10,14 @@ const MyProduct = () => {
 
     const { data: products = [], isLoading, refetch } = useQuery( {
         queryKey: [ 'products' ],
-        queryFn: () => fetch( `http://localhost:5000/products?email=${ user.email }` )
+        queryFn: () => fetch( `http://localhost:5000/products?email=${ user?.email }`, {
+            headers: {
+                authorization: `bearer ${ localStorage.getItem( 'accessToken' ) }`
+            }
+        } )
             .then( res => res.json() )
     } )
+    console.log( products );
 
     const handleDelete = id => {
         const proceed = window.confirm( 'Are your sure, you want to cancel this product?' )
@@ -38,7 +43,8 @@ const MyProduct = () => {
     return (
         <div className='grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12'>
             {
-                products.map( product => <MyProductCard key={ product._id } product={ product } handleDelete={ handleDelete }></MyProductCard> )
+                products &&
+                products?.map( product => <MyProductCard key={ product._id } product={ product } handleDelete={ handleDelete }></MyProductCard> )
             }
         </div>
     );

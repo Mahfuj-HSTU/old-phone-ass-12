@@ -2,11 +2,18 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { toast } from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
     const [ error, setError ] = useState( '' )
     const { createUser } = useContext( AuthContext )
+    const [ createdUserEmail, setCreatedUserEmail ] = useState( '' )
     const navigate = useNavigate();
+    const [ token ] = useToken( createdUserEmail );
+
+    if ( token ) {
+        navigate( '/' )
+    }
 
     // handle user create
     const handleRegister = event => {
@@ -46,8 +53,8 @@ const Register = () => {
             } )
                 .then( res => res.json() )
                 .then( data => {
-                    // setCreatedUserEmail( email )
-                    navigate( '/' )
+                    setCreatedUserEmail( email )
+
                 } )
         }
 
