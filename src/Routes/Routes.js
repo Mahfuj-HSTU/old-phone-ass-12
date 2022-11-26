@@ -56,7 +56,8 @@ const router = createBrowserRouter( [
                 element: <PrivateRoute><Sellers></Sellers> </PrivateRoute>
             },
             {
-                path: '/buyers',
+                path: '/buyers/:role',
+                loader: ( { params } ) => fetch( `http://localhost:5000/users/buyers/${ params.role }` ),
                 element: <PrivateRoute><Buyers></Buyers> </PrivateRoute>
             }
         ]

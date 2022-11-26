@@ -5,7 +5,7 @@ import logo from '../../../images/logo.png'
 
 const Header = () => {
     const { user, logOut } = useContext( AuthContext )
-
+    console.log( user )
 
     const handleLogOut = () => {
         logOut()
@@ -23,7 +23,7 @@ const Header = () => {
                     <li className='font-semibold dropdown'><Link tabIndex={ 0 }>Dashboard</Link>
                         <ul tabIndex={ 0 } className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li className='font-semibold'><Link to='/sellers'>All Seller</Link> </li>
-                            <li className='font-semibold'><Link to='/buyers'>All Buyer</Link> </li>
+                            <li className='font-semibold'><Link to='/buyers/Buyer'>All Buyer</Link> </li>
                             <li className='font-semibold'><Link to='/myOrders'>My Orders</Link> </li>
                             <li className='font-semibold'><Link to='/addProduct'>Add a Product</Link> </li>
                             <li className='font-semibold'><Link to='/myProduct'>My Product</Link> </li>
