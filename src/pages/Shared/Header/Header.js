@@ -26,6 +26,7 @@ const Header = () => {
                             <li className='font-semibold'><Link to='/buyers'>All Buyer</Link> </li>
                             <li className='font-semibold'><Link to='/myOrders'>My Orders</Link> </li>
                             <li className='font-semibold'><Link to='/addProduct'>Add a Product</Link> </li>
+                            <li className='font-semibold'><Link to='/myProduct'>My Product</Link> </li>
                         </ul>
                     </li>
                     <li className='font-semibold'>

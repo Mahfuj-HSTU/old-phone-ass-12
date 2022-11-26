@@ -1,4 +1,5 @@
 import React from 'react';
+import MyBookingModal from './MyBookingModal/MyBookingModal';
 
 const ProductsCard = ( { product } ) => {
     const { name, img, location, resale_price, original_price, used_time, sellers } = product;
@@ -16,10 +17,13 @@ const ProductsCard = ( { product } ) => {
                     <p className='text-xl font-semibold'>Seller's : { sellers }</p>
                     <p className='text-xl '>{ used_time } used</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary w-full mt-5">Book Now</button>
+                        <label htmlFor="my-modal" className="btn btn-primary w-full mt-5">Book Now</label>
                     </div>
                 </div>
             </div>
+            {
+                <MyBookingModal product={ product }></MyBookingModal>
+            }
         </div>
     );
 };
