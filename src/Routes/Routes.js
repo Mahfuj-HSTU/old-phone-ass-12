@@ -9,6 +9,9 @@ import Home from '../pages/Home/Home/Home';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import error from '../images/images.png'
+import Sellers from '../pages/Dashboard/Sellers';
+import Buyers from '../pages/Dashboard/Buyers';
 
 const router = createBrowserRouter( [
     {
@@ -48,8 +51,21 @@ const router = createBrowserRouter( [
                 path: '/myProduct',
                 element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>
             },
-
+            {
+                path: '/sellers',
+                element: <PrivateRoute><Sellers></Sellers> </PrivateRoute>
+            },
+            {
+                path: '/buyers',
+                element: <PrivateRoute><Buyers></Buyers> </PrivateRoute>
+            }
         ]
+    },
+    {
+        path: '*',
+        element: <div className='flex justify-center mt-10'>
+            <img src={ error } alt="" width='500px' />
+        </div>
     }
 ] )
 

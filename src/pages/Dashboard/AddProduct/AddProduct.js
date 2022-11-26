@@ -42,7 +42,8 @@ const AddProduct = () => {
         const value = event.target.value;
         const field = event.target.name;
         const email = user?.email;
-        const newProduct = { ...product, email };
+        const date = new Date().toLocaleString()
+        const newProduct = { ...product, email, date };
         newProduct[ field ] = value;
         setProduct( newProduct )
     }
@@ -63,9 +64,9 @@ const AddProduct = () => {
                     </div>
 
                     <select onChange={ handleInputBlur } className="select select-bordered w-full max-w-xs" name='brand' required>
-                        <option value={ 0 } disabled selected>Select Product Category</option>
+                        <option value={ 0 } disabled selected required>Select Product Category</option>
                         {
-                            categories.map( ( category, i ) => <option key={ category._id } value={ category.brand }>{ category.brand }</option> )
+                            categories.map( ( category, i ) => <option key={ category._id } value={ category.brand } required>{ category.brand }</option> )
                         }
                     </select>
 

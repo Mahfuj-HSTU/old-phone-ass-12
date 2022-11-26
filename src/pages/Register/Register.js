@@ -36,7 +36,7 @@ const Register = () => {
 
     return (
         <div className="hero w-full my-20">
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-10">
+            <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 py-10">
                 <h1 className="text-5xl text-center font-bold">Register </h1>
                 <form onSubmit={ handleRegister } className="card-body">
                     <div className="form-control">
@@ -58,12 +58,23 @@ const Register = () => {
                         </label>
                         <input type="text" name='photoUrl' placeholder="photo url" className="input input-bordered" />
                     </div>
+
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                     </div>
+
+                    <div className="form-control">
+                        <label className="label cursor-pointer">
+                            <span className="label-text">Buyer</span>
+                            <input type="radio" name="radio" className="radio radio-primary" value='Buyer' checked />
+                            <span className="label-text">Seller</span>
+                            <input type="radio" name="radio" className="radio radio-primary" value='Seller' />
+                        </label>
+                    </div>
+
                     <div className="form-control mt-6">
                         <input className="btn btn-primary" type="submit" value="Register" />
                     </div>
