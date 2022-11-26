@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const [ product, setProduct ] = useState( {} )
+    const { user } = useContext( AuthContext )
     const navigate = useNavigate();
+    // console.log( user?.email );
 
     const { data: categories = [] } = useQuery( {
         queryKey: [ 'categories' ],
@@ -29,7 +32,7 @@ const AddProduct = () => {
                 if ( data.acknowledged ) {
                     toast.success( 'Product added successfully' )
                     event.target.reset();
-                    navigate( '/' )
+                    navigate( '/myProduct' )
                 }
                 console.log( data )
             } )
@@ -38,7 +41,8 @@ const AddProduct = () => {
     const handleInputBlur = event => {
         const value = event.target.value;
         const field = event.target.name;
-        const newProduct = { ...product };
+        const email = user?.email;
+        const newProduct = { ...product, email };
         newProduct[ field ] = value;
         setProduct( newProduct )
     }
@@ -47,7 +51,7 @@ const AddProduct = () => {
     return (
         <div className="hero w-full my-20">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-10">
-                <h1 className="text-5xl text-center font-bold">Add Services </h1>
+                <h1 className="text-5xl text-center font-bold">Add Product </h1>
                 <form onSubmit={ handleAddProduct } className="card-body">
 
                     <div className="form-control">

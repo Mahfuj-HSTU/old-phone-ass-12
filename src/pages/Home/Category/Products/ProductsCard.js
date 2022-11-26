@@ -19,7 +19,6 @@ const ProductsCard = ( { product } ) => {
                         <button className="btn btn-primary w-full mt-5">Book Now</button>
                     </div>
                 </div>
-
             </div>
         </div>
     );
