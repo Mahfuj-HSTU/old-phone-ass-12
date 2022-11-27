@@ -35,6 +35,7 @@ const MyProduct = () => {
                 } )
         }
     }
+
     if ( isLoading ) {
         <Loading></Loading>
     }

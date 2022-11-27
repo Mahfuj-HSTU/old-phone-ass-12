@@ -1,10 +1,32 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const Buyers = () => {
     const buyers = useLoaderData();
+    const navigate = useNavigate();
 
-    console.log( buyers );
+    const handleDeleteBuyer = buyer => {
+        const proceed = window.confirm( 'Are your sure, you want to cancel this product?' )
+        if ( proceed ) {
+            fetch( `http://localhost:5000/users/buyer/${ buyer._id }`, {
+                method: 'delete',
+                headers: {
+                    authorization: `bearer ${ localStorage.getItem( 'accessToken' ) }`
+                }
+            } )
+                .then( res => res.json() )
+                .then( data => {
+                    if ( data.deletedCount > 0 ) {
+                        // console.log( data );
+                        toast.success( 'Buyer deleted successfully' )
+                        navigate( '/dashboard/buyers/Buyer' )
+                    }
+                } )
+        }
+    }
+
+
     return (
         <div className='mb-14'>
             <h2 className='text-4xl text-blue-800 font-semibold mt-5 mb-10'>All Buyers</h2>
@@ -25,7 +47,7 @@ const Buyers = () => {
                                 <th>{ i + 1 }</th>
                                 <td>{ buyer.name }</td>
                                 <td>{ buyer.email }</td>
-                                <td><button className='btn btn-xs btn-error'>Delete</button></td>
+                                <td><button onClick={ () => handleDeleteBuyer( buyer ) } className='btn btn-xs btn-error'>Delete</button></td>
                             </tr> )
                         }
 
