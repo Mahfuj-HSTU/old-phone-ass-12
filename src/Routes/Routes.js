@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import error from '../images/images.png'
 import Sellers from '../pages/Dashboard/Sellers';
 import Buyers from '../pages/Dashboard/Buyers';
+import AdminRoute from './AdminRoute/AdminRoute';
 
 const router = createBrowserRouter( [
     {
@@ -52,13 +53,14 @@ const router = createBrowserRouter( [
                 element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>
             },
             {
-                path: '/sellers',
-                element: <PrivateRoute><Sellers></Sellers> </PrivateRoute>
+                path: '/sellers/:role',
+                loader: ( { params } ) => fetch( `http://localhost:5000/users/sellers/${ params.role }` ),
+                element: <AdminRoute><Sellers></Sellers></AdminRoute>
             },
             {
                 path: '/buyers/:role',
                 loader: ( { params } ) => fetch( `http://localhost:5000/users/buyers/${ params.role }` ),
-                element: <PrivateRoute><Buyers></Buyers> </PrivateRoute>
+                element: <AdminRoute><Buyers></Buyers></AdminRoute>
             }
         ]
     },
