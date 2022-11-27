@@ -7,12 +7,14 @@ import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
 
 const Login = () => {
-    const { providerLogin, login } = useContext( AuthContext )
+    const { providerLogin, login, user } = useContext( AuthContext )
     const [ loginEmail, setLoginEmail ] = useState( '' )
     const [ token ] = useToken( loginEmail );
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
+
+    // console.log( user )
 
     const from = location.state?.from?.pathname || '/';
 
@@ -32,7 +34,7 @@ const Login = () => {
         login( email, password )
             .then( result => {
                 const user = result.user
-                console.log( user );
+                // console.log( user );
                 setLoginEmail( user?.email )
                 form.reset();
             } )
@@ -48,11 +50,29 @@ const Login = () => {
         providerLogin( googleProvider )
             .then( result => {
                 const user = result.user;
-                console.log( user );
+                saveUsers( user?.displayName, user?.email, 'Buyer' );
+                // console.log( user );
                 navigate( from, { replace: true } )
             } )
             .catch( error => console.error( 'error ', error ) )
+
+        const saveUsers = ( name, email, role ) => {
+            const info = { name, email, role };
+            console.log( info )
+            fetch( 'http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify( info )
+            } )
+                .then( res => res.json() )
+                .then( data => {
+                    setLoginEmail( email )
+                } )
+        }
     }
+
 
     return (
         <div className="hero w-full my-20">
@@ -78,7 +98,7 @@ const Login = () => {
                         <input className="btn btn-primary" type="submit" value="Login" />
                     </div>
                 </form>
-                <p className='text-center'>New to Safe Travel <Link className='text-orange-600 font-bold' to='/registration'>Sign Up</Link></p>
+                <p className='text-center'>New to Super Sale <Link className='text-orange-600 font-bold' to='/registration'>Sign Up</Link></p>
 
                 <div className="divider">OR</div>
 

@@ -13,6 +13,8 @@ import error from '../images/images.png'
 import Sellers from '../pages/Dashboard/Sellers';
 import Buyers from '../pages/Dashboard/Buyers';
 import AdminRoute from './AdminRoute/AdminRoute';
+import BuyerRoute from './BuyerRoute/BuyerRoute';
+import SellerRoute from './SellerRoute/SellerRoute';
 
 const router = createBrowserRouter( [
     {
@@ -42,15 +44,15 @@ const router = createBrowserRouter( [
             },
             {
                 path: '/myOrders',
-                element: <PrivateRoute><MyOrders></MyOrders></PrivateRoute>
+                element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
             {
                 path: '/addProduct',
-                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/myProduct',
-                element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>
+                element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             },
             {
                 path: '/sellers/:role',

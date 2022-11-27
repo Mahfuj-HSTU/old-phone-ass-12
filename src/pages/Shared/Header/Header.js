@@ -2,12 +2,16 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import useAdmin from '../../../hooks/useAdmin';
+import useBuyer from '../../../hooks/useBuyer';
+import useSeller from '../../../hooks/useSeller';
 import logo from '../../../images/logo.png'
 
 const Header = () => {
     const { user, logOut } = useContext( AuthContext )
     const [ isAdmin ] = useAdmin( user?.email )
-    console.log( user )
+    const [ isBuyer ] = useBuyer( user?.email )
+    const [ isSeller ] = useSeller( user?.email )
+    // console.log( user )
 
     const handleLogOut = () => {
         logOut()
@@ -31,12 +35,18 @@ const Header = () => {
                                     <li className='font-semibold'><Link to='/buyers/Buyer'>All Buyer</Link> </li>
                                 </>
                             }
+                            {
+                                isBuyer && <>
+                                    <li className='font-semibold'><Link to='/myOrders'>My Orders</Link> </li>
+                                </>
+                            }
+                            {
+                                isSeller && <>
+                                    <li className='font-semibold'><Link to='/addProduct'>Add a Product</Link> </li>
 
-                            <li className='font-semibold'><Link to='/myOrders'>My Orders</Link> </li>
-
-                            <li className='font-semibold'><Link to='/addProduct'>Add a Product</Link> </li>
-
-                            <li className='font-semibold'><Link to='/myProduct'>My Product</Link> </li>
+                                    <li className='font-semibold'><Link to='/myProduct'>My Product</Link> </li>
+                                </>
+                            }
 
                         </ul>
                     </li>
