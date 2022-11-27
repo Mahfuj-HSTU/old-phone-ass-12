@@ -15,6 +15,7 @@ import Buyers from '../pages/Dashboard/Buyers';
 import AdminRoute from './AdminRoute/AdminRoute';
 import BuyerRoute from './BuyerRoute/BuyerRoute';
 import SellerRoute from './SellerRoute/SellerRoute';
+import DashboardLayout from '../layout/DashboardLayout';
 
 const router = createBrowserRouter( [
     {
@@ -42,28 +43,36 @@ const router = createBrowserRouter( [
                 path: '/registration',
                 element: <Register></Register>
             },
+
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute> <DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
             {
-                path: '/myOrders',
+                path: '/dashboard/myOrder',
                 element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
             {
-                path: '/addProduct',
+                path: '/dashboard/addProduct',
                 element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
-                path: '/myProduct',
+                path: '/dashboard/myProduct',
                 element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             },
             {
-                path: '/sellers/:role',
+                path: '/dashboard/sellers/:role',
                 loader: ( { params } ) => fetch( `http://localhost:5000/users/sellers/${ params.role }` ),
                 element: <AdminRoute><Sellers></Sellers></AdminRoute>
             },
             {
-                path: '/buyers/:role',
+                path: '/dashboard/buyers/:role',
                 loader: ( { params } ) => fetch( `http://localhost:5000/users/buyers/${ params.role }` ),
                 element: <AdminRoute><Buyers></Buyers></AdminRoute>
             }
+
         ]
     },
     {

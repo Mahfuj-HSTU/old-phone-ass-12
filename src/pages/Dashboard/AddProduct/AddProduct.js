@@ -50,7 +50,7 @@ const AddProduct = () => {
 
 
     return (
-        <div className="hero w-full my-20">
+        <div className="hero w-full my-10">
             <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 py-10">
                 <h1 className="text-5xl text-center font-bold">Add Product </h1>
                 <form onSubmit={ handleAddProduct } className="card-body">
@@ -89,6 +89,13 @@ const AddProduct = () => {
                     <div className="form-control">
                         <input onChange={ handleInputBlur } type="text" name='used_time' placeholder="Used times" className="input input-bordered" required />
                     </div>
+
+                    <select onChange={ handleInputBlur } className="select select-bordered w-full max-w-xs" name='condition' required>
+                        <option value={ 0 } disabled selected>Product Condition</option>
+                        <option value={ 'Excellent' }>Excellent</option>
+                        <option value={ 'Good' }>Good</option>
+                        <option value={ 'Fair' }>Fair</option>
+                    </select>
 
                     <div className="form-control">
                         <input onChange={ handleInputBlur } type="text" name='phone' placeholder="Mobile number" className="input input-bordered" required />

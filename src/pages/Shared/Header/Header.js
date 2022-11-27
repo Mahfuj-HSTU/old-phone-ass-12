@@ -1,16 +1,11 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
-import useAdmin from '../../../hooks/useAdmin';
-import useBuyer from '../../../hooks/useBuyer';
-import useSeller from '../../../hooks/useSeller';
 import logo from '../../../images/logo.png'
 
 const Header = () => {
     const { user, logOut } = useContext( AuthContext )
-    const [ isAdmin ] = useAdmin( user?.email )
-    const [ isBuyer ] = useBuyer( user?.email )
-    const [ isSeller ] = useSeller( user?.email )
+
     // console.log( user )
 
     const handleLogOut = () => {
@@ -26,30 +21,7 @@ const Header = () => {
         {
             user?.email ?
                 <>
-                    <li className='font-semibold dropdown'><Link tabIndex={ 0 }>Dashboard</Link>
-                        <ul tabIndex={ 0 } className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            {
-                                isAdmin && <>
-                                    <li className='font-semibold'><Link to='/sellers/Seller'>All Seller</Link> </li>
-
-                                    <li className='font-semibold'><Link to='/buyers/Buyer'>All Buyer</Link> </li>
-                                </>
-                            }
-                            {
-                                isBuyer && <>
-                                    <li className='font-semibold'><Link to='/myOrders'>My Orders</Link> </li>
-                                </>
-                            }
-                            {
-                                isSeller && <>
-                                    <li className='font-semibold'><Link to='/addProduct'>Add a Product</Link> </li>
-
-                                    <li className='font-semibold'><Link to='/myProduct'>My Product</Link> </li>
-                                </>
-                            }
-
-                        </ul>
-                    </li>
+                    <li className='font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
                     <li className='font-semibold'>
                         <button onClick={ handleLogOut } className='btn-ghost'>Log Out</button>
                     </li>
@@ -70,12 +42,19 @@ const Header = () => {
                     </ul>
                 </div>
                 <Link to='/' className="btn btn-ghost normal-case text-xl"><img src={ logo } alt="" width='50px' height='50px' /> Super Sale</Link>
+                <label htmlFor="dashboard-drawer" tabIndex={ 0 } className="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
+
+
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     { menuItems }
                 </ul>
+
             </div>
+
         </div>
     );
 };

@@ -7,7 +7,7 @@ const Sellers = () => {
     // console.log( sellers );
     return (
         <div className='mb-14'>
-            <h2 className='text-4xl text-blue-800 font-semibold my-10'>All Sellers</h2>
+            <h2 className='text-4xl text-blue-800 font-semibold mt-5 mb-10'>All Sellers</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
