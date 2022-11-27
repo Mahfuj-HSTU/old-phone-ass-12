@@ -10,7 +10,7 @@ const MyProduct = () => {
 
     const { data: products = [], isLoading, refetch } = useQuery( {
         queryKey: [ 'products' ],
-        queryFn: () => fetch( `http://localhost:5000/products?email=${ user?.email }`, {
+        queryFn: () => fetch( `https://old-phone-server.vercel.app/products?email=${ user?.email }`, {
             headers: {
                 authorization: `bearer ${ localStorage.getItem( 'accessToken' ) }`
             }
@@ -22,7 +22,7 @@ const MyProduct = () => {
     const handleDelete = id => {
         const proceed = window.confirm( 'Are your sure, you want to cancel this product?' )
         if ( proceed ) {
-            fetch( `http://localhost:5000/products/${ id }`, {
+            fetch( `https://old-phone-server.vercel.app/products/${ id }`, {
                 method: 'DELETE'
             } )
                 .then( res => res.json() )

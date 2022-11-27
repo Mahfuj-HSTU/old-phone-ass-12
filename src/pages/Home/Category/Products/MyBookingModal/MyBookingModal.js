@@ -15,7 +15,7 @@ const MyBookingModal = ( { product } ) => {
             img, name, resale_price
         }
 
-        fetch( 'http://localhost:5000/orders', {
+        fetch( 'https://old-phone-server.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

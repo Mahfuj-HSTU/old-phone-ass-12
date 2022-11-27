@@ -28,7 +28,7 @@ const router = createBrowserRouter( [
             },
             {
                 path: '/products/:brand',
-                loader: ( { params } ) => fetch( `http://localhost:5000/products/${ params.brand }` ),
+                loader: ( { params } ) => fetch( `https://old-phone-server.vercel.app/products/${ params.brand }` ),
                 element: <PrivateRoute><Products></Products ></PrivateRoute>
             },
             {
@@ -64,12 +64,12 @@ const router = createBrowserRouter( [
             },
             {
                 path: '/dashboard/sellers/:role',
-                loader: ( { params } ) => fetch( `http://localhost:5000/users/sellers/${ params.role }` ),
+                loader: ( { params } ) => fetch( `https://old-phone-server.vercel.app/users/sellers/${ params.role }` ),
                 element: <AdminRoute><Sellers></Sellers></AdminRoute>
             },
             {
                 path: '/dashboard/buyers/:role',
-                loader: ( { params } ) => fetch( `http://localhost:5000/users/buyers/${ params.role }` ),
+                loader: ( { params } ) => fetch( `https://old-phone-server.vercel.app/users/buyers/${ params.role }` ),
                 element: <AdminRoute><Buyers></Buyers></AdminRoute>
             }
 

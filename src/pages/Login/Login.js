@@ -59,7 +59,7 @@ const Login = () => {
         const saveUsers = ( name, email, role ) => {
             const info = { name, email, role };
             console.log( info )
-            fetch( 'http://localhost:5000/users', {
+            fetch( 'https://old-phone-server.vercel.app/users', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

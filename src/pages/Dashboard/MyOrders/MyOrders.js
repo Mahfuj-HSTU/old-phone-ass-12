@@ -7,7 +7,7 @@ const MyOrders = () => {
 
     const { data: orders = [], isLoading } = useQuery( {
         queryKey: [ 'orders' ],
-        queryFn: () => fetch( 'http://localhost:5000/orders' )
+        queryFn: () => fetch( 'https://old-phone-server.vercel.app/orders' )
             .then( res => res.json() )
     } )
 

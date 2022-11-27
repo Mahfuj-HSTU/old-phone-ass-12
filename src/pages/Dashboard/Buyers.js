@@ -9,7 +9,7 @@ const Buyers = () => {
     const handleDeleteBuyer = buyer => {
         const proceed = window.confirm( 'Are your sure, you want to cancel this product?' )
         if ( proceed ) {
-            fetch( `http://localhost:5000/users/buyer/${ buyer._id }`, {
+            fetch( `https://old-phone-server.vercel.app/users/buyer/${ buyer._id }`, {
                 method: 'delete',
                 headers: {
                     authorization: `bearer ${ localStorage.getItem( 'accessToken' ) }`

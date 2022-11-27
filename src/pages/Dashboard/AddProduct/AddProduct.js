@@ -12,14 +12,14 @@ const AddProduct = () => {
 
     const { data: categories = [] } = useQuery( {
         queryKey: [ 'categories' ],
-        queryFn: () => fetch( 'http://localhost:5000/categories' )
+        queryFn: () => fetch( 'https://old-phone-server.vercel.app/categories' )
             .then( res => res.json() )
     } )
 
     const handleAddProduct = event => {
         event.preventDefault();
         // console.log( product );
-        const url = ( 'http://localhost:5000/products' )
+        const url = ( 'https://old-phone-server.vercel.app/products' )
         fetch( url, {
             method: "POST",
             headers: {
@@ -32,7 +32,7 @@ const AddProduct = () => {
                 if ( data.acknowledged ) {
                     toast.success( 'Product added successfully' )
                     event.target.reset();
-                    navigate( '/myProduct' )
+                    navigate( '/dashboard/myProduct' )
                 }
                 console.log( data )
             } )
