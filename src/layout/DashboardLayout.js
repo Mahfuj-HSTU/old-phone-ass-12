@@ -16,17 +16,18 @@ const DashboardLayout = () => {
     return (
         <div>
             <Header></Header>
-            <div className="drawer drawer-mobile">
+            <div className="drawer drawer-mobile mt-16 ">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-                    <h2 className='text-4xl text-blue-700 font-semibold mt-10 mb-5'>Here is your Dashboard</h2>
+
+                <div className="drawer-content ">
+                    <h2 className='text-4xl text-blue-700 font-semibold mt-10 mb-7'>Here is your Dashboard</h2>
                     <hr /> <hr />
                     <Outlet></Outlet>
                 </div>
 
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base-content">
+                    <ul className="menu p-4 w-80 text-base-content border-r-2">
                         {
                             isAdmin && <>
                                 <li className='font-semibold'><Link to='/dashboard/sellers/Seller'>All Seller</Link> </li>
@@ -44,8 +45,11 @@ const DashboardLayout = () => {
                                 <li className='font-semibold'><Link to='/dashboard/myProduct'>My Product</Link> </li>
                             </>
                         }
+
                     </ul>
+
                 </div>
+
             </div>
             <Footer></Footer>
         </div>
