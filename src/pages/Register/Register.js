@@ -54,7 +54,6 @@ const Register = () => {
                 .then( res => res.json() )
                 .then( data => {
                     setCreatedUserEmail( email )
-
                 } )
         }
 
